@@ -17,6 +17,21 @@
 	position: absolute;
 }
 
+.pause [face] {
+	transition: left .4s, top .4s, transform .4s;
+	-ms-transition: left .4s, top .4s, -ms-transform .4s;
+	-moz-transition: left .4s, top .4s, -moz-transform .4s;
+	-webkit-transition: left .4s, top .4s, -webkit-transform .4s;
+}
+[face].focussed {
+	left: 10px;
+	top: 10px;
+	transform: rotateY(720deg) scale(2, 2) !important;
+	-ms-transform: rotateY(720deg) scale(2, 2) !important;
+	-moz-transform: rotateY(720deg) scale(2, 2) !important;
+	-webkit-transform: rotateY(720deg) scale(2, 2) !important;
+}
+
 .hide-front .front,
 .hole {
 	visibility: hidden;
@@ -31,7 +46,7 @@
 .right {
 	background: red;
 }
-[face]:hover {
+[face].outer:hover {
 	visibility: visible !important;
 	background: yellow !important;
 }

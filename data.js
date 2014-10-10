@@ -3,21 +3,20 @@ var data = {
 };
 
 (function(){
-	function expandFaces(faceSets, front) {
+	function expandFaces(faceSets, n) {
 		var faces = [];
 		faceSets.forEach(function(faceSet) {
 			faceSet.cells.forEach(function(row, y) {
 				row.forEach(function(cell, x) {
 					var face = angular.copy(faceSet);
 					delete face.cells;
-					if (cell.classes) {
-						if ((~cell.classes.indexOf('hole')) &&
-							(!front && ~cell.classes.indexOf('front')))
-							return;
+					if (cell.hide)
+						return;
+					if (cell.classes)
 						face.classes = face.classes.concat(cell.classes);
-					}
 					face.transform += ' translate3d(' + (x * 18 - 18) + 'em, ' + (y * 18 - 18) + 'em, ' + face.offset + 'em)';
 					delete face.offset;
+					face.level = n;
 					faces.push(face);
 				});
 			});
@@ -25,7 +24,7 @@ var data = {
 		return faces;
 	};
 
-	function addSponge(transform, front, classes) {
+	function addSponge(transform, front, classes, n) {
 		var sponge = {
 			classes: classes,
 			faces: expandFaces([ 
@@ -36,16 +35,16 @@ var data = {
 					offset: 27,
 					cells: [
 						[ {}, {}, {} ],
-						[ {}, { classes: ['hole'] }, {} ],
-						[ { classes: ['front'] }, {}, {} ]
+						[ {}, { hide: true }, {} ],
+						[ { hide: !front }, {}, {} ]
 					]
 				}, {
 					classes: [ 'outer', 'top' ],
 					transform: transform + ' rotateX(-90deg)',
 					offset: 27,
 					cells: [
-						[ { classes: ['front'] }, {}, {} ],
-						[ {}, { classes: ['hole'] }, {} ],
+						[ { hide: !front }, {}, {} ],
+						[ {}, { hide: true }, {} ],
 						[ {}, {}, {} ]
 					]
 				}, {
@@ -54,8 +53,8 @@ var data = {
 					offset: 27,
 					cells: [
 						[ {}, {}, {} ],
-						[ {}, { classes: ['hole'] }, {} ],
-						[ {}, {}, { classes: ['front'] } ]
+						[ {}, { hide: true }, {} ],
+						[ {}, {}, { hide: !front } ]
 					]
 				},
 				// inner faces:
@@ -64,74 +63,72 @@ var data = {
 					transform: transform + '',
 					offset: -9,
 					cells: [
-						[ { classes: ['hole'] }, {}, { classes: ['hole'] } ],
-						[ { classes: ['hole'] }, { classes: ['hole'] }, {} ],
-						[ { classes: ['hole'] }, { classes: ['hole'] }, { classes: ['hole'] } ]
+						[ { hide: true }, {}, { hide: true } ],
+						[ { hide: true }, { hide: true }, {} ],
+						[ { hide: true }, { hide: true }, { hide: true } ]
 					]
 				}, {
 					classes: [ 'inner', 'top' ],
 					transform: transform + ' rotateX(-90deg)',
 					offset: -9,
 					cells: [
-						[ { classes: ['hole'] }, { classes: ['hole'] }, { classes: ['hole'] } ],
-						[ { classes: ['hole'] }, { classes: ['hole'] }, {} ],
-						[ { classes: ['hole'] }, {}, { classes: ['hole'] } ]
+						[ { hide: true }, { hide: true }, { hide: true } ],
+						[ { hide: true }, { hide: true }, {} ],
+						[ { hide: true }, {}, { hide: true } ]
 					]
 				}, {
 					classes: [ 'inner', 'right' ],
 					transform: transform + ' rotateY(-90deg)',
 					offset: -9,
 					cells: [
-						[ { classes: ['hole'] }, {}, { classes: ['hole'] } ],
-						[ {}, { classes: ['hole'] }, { classes: ['hole'] } ],
-						[ { classes: ['hole'] }, { classes: ['hole'] }, { classes: ['hole'] } ]
+						[ { hide: true }, {}, { hide: true } ],
+						[ {}, { hide: true }, { hide: true } ],
+						[ { hide: true }, { hide: true }, { hide: true } ]
 					]
 				}, {
 					classes: [ 'far-inner', 'inner', 'left' ],
 					transform: transform + '',
 					offset: -9,
 					cells: [
-						[ { classes: ['hole'] }, { classes: ['hole'] }, { classes: ['hole'] } ],
-						[ {}, { classes: ['hole'] }, { classes: ['hole'] } ],
-						[ { classes: ['hole'] }, {}, { classes: ['hole'] } ]
+						[ { hide: true }, { hide: true }, { hide: true } ],
+						[ {}, { hide: true }, { hide: true } ],
+						[ { hide: true }, {}, { hide: true } ]
 					]
 				}, {
 					classes: [ 'far-inner', 'inner', 'top' ],
 					transform: transform + ' rotateX(-90deg)',
 					offset: -9,
 					cells: [
-						[ { classes: ['hole'] }, {}, { classes: ['hole'] } ],
-						[ {}, { classes: ['hole'] }, { classes: ['hole'] } ],
-						[ { classes: ['hole'] }, { classes: ['hole'] }, { classes: ['hole'] } ]
+						[ { hide: true }, {}, { hide: true } ],
+						[ {}, { hide: true }, { hide: true } ],
+						[ { hide: true }, { hide: true }, { hide: true } ]
 					]
 				}, {
 					classes: [ 'far-inner', 'inner', 'right' ],
 					transform: transform + ' rotateY(-90deg)',
 					offset: -9,
 					cells: [
-						[ { classes: ['hole'] }, { classes: ['hole'] }, { classes: ['hole'] } ],
-						[ { classes: ['hole'] }, { classes: ['hole'] }, {} ],
-						[ { classes: ['hole'] }, {}, { classes: ['hole'] } ]
+						[ { hide: true }, { hide: true }, { hide: true } ],
+						[ { hide: true }, { hide: true }, {} ],
+						[ { hide: true }, {}, { hide: true } ]
 					]
-				} ])
+				} ], n)
 		};
-		if (!front)
-			sponge.classes.push('hide-front');
 		data.sponges.push(sponge);
 	}
 
 	function spongeCascade(n) {
-		addSponge('', false, ['sponge-0']);
 		var move = 0,
 			scale = 1,
-			front = true,
+			front = false,
 			i = 0;
 		do {
 			front = i >= n;
 			addSponge('translate3d(-' + move + 'em, ' + move + 'em, ' + move + 'em) '+
 					  'scale3d(' + scale + ', ' + scale + ', ' + scale + ')',
 					  front,
-					  ['sponge-' + i]);
+					  ['sponge-' + i],
+					  i);
 			i++;
 			scale /= 3;
 			move += 54 * scale;

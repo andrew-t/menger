@@ -7,13 +7,17 @@
 		<link rel="stylesheet" type="text/css" href="menger.css">
 	</head>
 	<body ng-app="mega">
-		<div ng-controller="mega">
-			<div scene="scene">
+		<div ng-controller="mega" id="mega">
+			<div scene="scene"
+				 ng-class="{
+				 	 pause: scene.pause
+				 }">
 				<div ng-repeat="sponge in data.sponges"
 					 ng-class="sponge.classes">
 					<div ng-repeat="face in sponge.faces"
 					     face="face"
-					     ng-class="face.classes">
+					     ng-class="face.classes"
+					     ng-click="faceClick(face, $event)">
 					    content???
 					</div>
 				</div>

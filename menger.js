@@ -12,7 +12,7 @@ angular.module('menger', [])
 		// todo
 	};
 	this.trigger = function(event) {
-		if (!self.size) return;
+		if (!self.size || scope.scene.pause) return;
 		if (!event) event = {
 			pageY: 0,
 			pageX: 0
@@ -39,15 +39,15 @@ angular.module('menger', [])
 		},
 		controller: 'sceneController',
 		link: function(scope, element, attrs, ctrl) {
-			var resize = function() {
-					ctrl.size = {
-						width: element.prop('offsetWidth'),
-						height: element.prop('offsetHeight')
-					};
-					var m = Math.max(ctrl.size.width, ctrl.size.height);
-					element.css('font-size', m / scope.scene.fitSize + 'px');
-					ctrl.trigger();
+			function resize() {
+				ctrl.size = {
+					width: element.prop('offsetWidth'),
+					height: element.prop('offsetHeight')
 				};
+				var m = Math.max(ctrl.size.width, ctrl.size.height);
+				element.css('font-size', m / scope.scene.fitSize + 'px');
+				ctrl.trigger();
+			};
 			angular.element(window).on('resize', resize);
 			scope.$on('$destroy', function() {
 				angular.element(window).off('resize', resize);
