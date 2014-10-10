@@ -1,10 +1,8 @@
 angular.module('menger', [])
 .controller('sceneController', ['$scope', function(scope) {
 	var faces = [],
-		self = this;
-	scope.$watch('transform', function(value) {
-		 transform = value + ' ';
-	});
+		self = this,
+		lastEvent;
 	this.register = function(callback) {
 		faces.push(callback);
 	};
@@ -13,10 +11,12 @@ angular.module('menger', [])
 	};
 	this.trigger = function(event) {
 		if (!self.size || scope.scene.pause) return;
-		if (!event) event = {
-			pageY: 0,
-			pageX: 0
-		};
+		if (!event || event.pageX === undefined)
+			event = lastEvent || {
+				pageY: 0,
+				pageX: 0
+			};
+		lastEvent = event;
 		var sceneTransform = 
 			'rotateX(' + 
 				((event.pageY / self.size.height - 0.5) * 2 * scope.scene.sensitivity) +
