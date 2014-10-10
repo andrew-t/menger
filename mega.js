@@ -3,16 +3,17 @@ angular.module('mega', ['menger'])
 	var x = Math.atan2(1, Math.sqrt(2)) * 180 / Math.PI;
 	scope.zoom = 0;
 	scope.$watch('zoom', function(zoom) {
-			var power = Math.pow(3, zoom),
-				scale = 0.8 * power,
-				move = 18 * (power - 1);
+			var wholeScale = 0.8,
+				power = Math.pow(3, zoom),
+				scale = wholeScale * power,
+				move = (27 * wholeScale) * (power - 1);
 			scope.scene = {
 				// You got to move 'em, move 'em.
 				transform:
 					'rotateX(' + x + 'deg) rotateY(45deg) ' +
 					'translate3d(' + move + 'em, ' + -move + 'em, ' + -move + 'em) ' +
 					'scale3d(' + scale + ', ' + scale + ', ' + scale + ') ',
-				sensitivity: 15,
+				sensitivity: 5,
 				maxRotation: 45,
 				fitSize: 100
 			};

@@ -7,6 +7,7 @@
 	overflow: hidden;
     -webkit-perspective: 500em;
     perspective: 500em;
+    background: black;
 }
 
 [face] {
@@ -15,6 +16,7 @@
 	left: calc(50% - 9em);
 	top: calc(50% - 9em);
 	position: absolute;
+	border: 1px solid black;
 }
 
 .pause [face] {
@@ -24,11 +26,15 @@
 	-webkit-transition: box-shadow .4, left .4s, top .4s, -webkit-transform .4s;
 }
 [face].focussed {
-	transform: rotateY(720deg) !important;
-	-ms-transform: rotateY(720deg) !important;
-	-moz-transform: rotateY(720deg) !important;
-	-webkit-transform: rotateY(720deg) !important;
+	transform: rotateY(720deg) translateZ(100em) scale(5, 5) !important;
+	-ms-transform: rotateY(720deg) translateZ(100em) scale(5, 5) !important;
+	-moz-transform: rotateY(720deg) translateZ(100em) scale(5, 5) !important;
+	-webkit-transform: rotateY(720deg) translateZ(100em) scale(5, 5) !important;
 	box-shadow: 0 5px 13px 2px black;
+	-webkit-filter: blur(.2em);
+	-moz-filter: blur(.2em);
+	-o-filter: blur(.2em);
+	-ms-filter: blur(.2em);
 }
 [face].topmost {
 	z-index: 10;
