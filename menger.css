@@ -10,21 +10,11 @@
 }
 
 [face] {
-	width: 54em;
-	height: 54em;
-	left: calc(50% - 27em);
-	top: calc(50% - 27em);
+	width: 18em;
+	height: 18em;
+	left: calc(50% - 9em);
+	top: calc(50% - 9em);
 	position: absolute;
-}
-
-table {
-	border: none;
-	font-size: inherit;
-}
-td {
-	margin: 0;
-	border: none;
-	font-size: 9em;
 }
 
 .hide-front .front,
@@ -32,16 +22,16 @@ td {
 	visibility: hidden;
 }
 
-.top td {
+.top {
 	background: blue;
 }
-.left td {
+.left {
 	background: green;
 }
-.right td {
+.right {
 	background: red;
 }
-td:hover {
+[face]:hover {
 	visibility: visible !important;
 	background: yellow !important;
 }
