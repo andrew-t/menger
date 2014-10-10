@@ -4,4 +4,25 @@
 	left: 0;
 	width: 100%;
 	height: 100%;
+	overflow: hidden;
+}
+
+[face] {
+	width: 54em;
+	height: 54em;
+	left: calc(50% - 27em);
+	top: calc(50% - 27em);
+	position: absolute;
+}
+
+.hideFront .front,
+.hole {
+	visibility: hidden;
+}
+
+td {
+	background: blue;
+}
+td:hover {
+	background: red;
 }

@@ -1,16 +1,23 @@
 <html>
 	<head>
 		<script src="angular.min.js"></script>
+		<script src="data.js"></script>
 		<script src="menger.js"></script>
 		<link rel="stylesheet" type="text/css" href="menger.css">
 	</head>
 	<body ng-app="menger">
-		<div scene rotation="" sensitivity="15" maxRotation="45">
-			<div face="scale(2)">
-				AA
-			</div>
-			<div face="rotateZ(45deg)">
-				BBB
+		<div scene rotation="translate3d(0, 0, 54em) rotateX(45deg) rotateY(45deg)" sensitivity="15" max-rotation="45" fit-size="80">
+			<div ng-repeat="sponge in data.sponges">
+				<table ng-repeat="face in sponge.faces"
+				       face="face"
+				       ng-class="{
+				       	   hideFront: !face.front
+				       }">
+					<tr ng-repeat="row in face.cells">
+						<td ng-repeat="cell in row"
+							ng-class="cell.classes"></td>
+					</tr>
+				</table>
 			</div>
 		</div>
 	</body>
