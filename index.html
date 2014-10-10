@@ -6,16 +6,17 @@
 		<link rel="stylesheet" type="text/css" href="menger.css">
 	</head>
 	<body ng-app="menger">
-		<div scene rotation="translate3d(0, 0, 54em) rotateX(45deg) rotateY(45deg)" sensitivity="15" max-rotation="45" fit-size="80">
-			<div ng-repeat="sponge in data.sponges">
+		<div scene rotation="translate3d(0, 0, 54em) rotateX(35.264389682754654deg) rotateY(45deg) scale3d(0.8, 0.8, 0.8)" sensitivity="15" max-rotation="45" fit-size="150">
+			<div ng-repeat="sponge in data.sponges"
+				 ng-class="sponge.classes">
 				<table ng-repeat="face in sponge.faces"
 				       face="face"
-				       ng-class="{
-				       	   hideFront: !face.front
-				       }">
+				       ng-class="face.classes">
 					<tr ng-repeat="row in face.cells">
 						<td ng-repeat="cell in row"
-							ng-class="cell.classes"></td>
+							ng-class="cell.classes">
+							F
+						</td>
 					</tr>
 				</table>
 			</div>
