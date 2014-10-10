@@ -2,7 +2,9 @@ angular.module('menger', [])
 .controller('sceneController', ['$scope', function(scope) {
 	var faces = [],
 		self = this;
-	scope.data = data;
+	scope.$watch('transform', function(value) {
+		 transform = value + ' ';
+	});
 	this.register = function(callback) {
 		faces.push(callback);
 	};
@@ -17,36 +19,35 @@ angular.module('menger', [])
 		};
 		var sceneTransform = 
 			'rotateX(' + 
-				((event.pageY / self.size.height - 0.5) * 2 * scope.sensitivity) +
+				((event.pageY / self.size.height - 0.5) * 2 * scope.scene.sensitivity) +
 			'deg) rotateY(' +
-				((event.pageX / self.size.width - 0.5) * -2 * scope.sensitivity) +
-			'deg) ' + scope.transform;
+				((event.pageX / self.size.width - 0.5) * -2 * scope.scene.sensitivity) +
+			'deg) ' + scope.scene.transform + ' ';
 		faces.forEach(function(face) {
 			face(sceneTransform);
 		});
 	};
+	scope.$watch(self.trigger);
 	angular.element(window).on('mousemove', self.trigger);
 	scope.$on('$destroy', function() {
 		angular.element(window).off('mousemove', self.trigger);
 	});
-	self.trigger();
 }]).directive('scene', ['$timeout', function(timeout) {
 	return {
+		scope: {
+			scene: '=scene'
+		},
 		controller: 'sceneController',
 		link: function(scope, element, attrs, ctrl) {
-			var fitSize = parseFloat(attrs.fitSize),
-				resize = function() {
+			var resize = function() {
 					ctrl.size = {
 						width: element.prop('offsetWidth'),
 						height: element.prop('offsetHeight')
 					};
 					var m = Math.max(ctrl.size.width, ctrl.size.height);
-					element.css('font-size', m / fitSize + 'px');
+					element.css('font-size', m / scope.scene.fitSize + 'px');
 					ctrl.trigger();
 				};
-			scope.transform = attrs.rotation + ' ';
-			scope.sensitivity = parseFloat(attrs.sensitivity);
-			scope.maxRotation = parseFloat(attrs.maxRotation);
 			angular.element(window).on('resize', resize);
 			scope.$on('$destroy', function() {
 				angular.element(window).off('resize', resize);
