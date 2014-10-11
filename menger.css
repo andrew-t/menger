@@ -64,7 +64,7 @@
 [face].outer {
 	cursor: pointer;
 }
-[face].outer:hover:after {
+[face].outer:not(.focussed):hover:after {
 	position: absolute;
 	left: 0;
 	top: 0;
