@@ -11,7 +11,7 @@ var sponges = [
 (function() {
 	var template = sponges.pop(),
 		spongeNumber = 0;
-	[5, 8, 18, 9].forEach(function(n, level) {
+	[18, 12, 9, 5].forEach(function(n, level) {
 		for (var i = 0; i < n; ++i)
 			sponges.push({
 				level: level + 1,
@@ -22,16 +22,17 @@ var sponges = [
 	});
 })();
 
+// reverse order of levels - high levels first
 sponges.sort(function(a, b) {
-	return a.level - b.level;
+	return b.level - a.level;
 });
 
 // now populate the faces with them:
 (function(){
 	var faceOrder = [
-		[7, 6, 4, 5, 2, 3, 1, 0], // left
-		[2, 4, 1, 7, 0, 6, 3, 5], // top
-		[5, 3, 6, 0, 7, 1, 4, 2] // right
+		[5, 3, 6, 0, 7, 1, 4, 2], // .right (on the left because i messed up)
+		[0, 1, 3, 2, 6, 4, 5, 7], // .top (on the bottom because i messed up)
+		[7, 6, 4, 5, 2, 3, 1, 0]  // .left (on the right because i messed up)
 	];
 	function populate(level, face, square, front, sponge) {
 		// this is kind of ghastly but only runs once
@@ -40,7 +41,7 @@ sponges.sort(function(a, b) {
 			f = front
 				? faceOrder[face][square]
 				: (faceOrder[face][square + 1] - (faceOrder[face][square + 1] > faceOrder[face][0] ? 1 : 0)),
-			d = data.sponges[level - 1].faces[offset + f];
+			d = data.sponges[level].faces[offset + f];
 		d.info = sponge;
 		d.img = sponge.image;
 	};
@@ -48,16 +49,16 @@ sponges.sort(function(a, b) {
 		lastLevel = 0;
 		square = 0,
 		front = false;
-	sponges.forEach(function(sponge) {
-		if (sponge.level > lastLevel) {
+	sponges.forEach(function(sponge, i) {
+		if (sponge.level !== lastLevel) {
 			lastLevel = sponge.level;
-			front = (sponge.level == data.sponges.length - 1);
-			square = front ? 0 : 1;
+			front = (sponge.level == 1);
+			square = 0;
 			face = 0;
 		}
-		populate(sponge.level, face, square, front, sponge);
+		populate(4 - sponge.level, face, square, front, sponge);
 		face = (face + 1) % 3;
 		if (!face) ++square;
-		if (square > 8) throw 'too many level ' + level + 's';
+		if (square > (front ? 7 : 6)) throw 'too many level ' + sponge.level + 's';
 	});
 })();
