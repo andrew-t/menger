@@ -154,5 +154,7 @@
 	text-align: justify;
 }
 .content img {
-	width: 100%;
+	max-width: calc(100% - 2rem);
+	float: right;
+	margin: 2rem;
 }
