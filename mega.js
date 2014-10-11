@@ -28,10 +28,12 @@ angular.module('mega', ['menger'])
 			lastFace = undefined;
 			scope.$apply(function() {
 				lf.classes.pop();
+				scope.showSelected = false;
 			});
 			timeout(function() {
 				lf.classes.pop();
 				scope.$apply(function() {
+					scope.selected = undefined;
 					scope.scene.pause = false;
 				});
 				element.off('click', resume);
@@ -63,8 +65,14 @@ angular.module('mega', ['menger'])
 			face.classes.push('topmost');
 			face.classes.push('focussed');
 			lastFace = face;
+			scope.selected = {
+				title: 'title',
+				text: 'text'
+			};
+			scope.showSelected = false;
 			timeout(function() {
 				element.on('click', resume);
+				scope.showSelected = true;
 			});
 		} else if (face.level > scope.zoom)
 			zoom(1, 20, 400);

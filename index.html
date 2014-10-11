@@ -10,19 +10,23 @@
 		<div ng-controller="mega" id="mega">
 			<div scene="scene"
 				 id="scene"
-				 ng-class="{
-				 	 pause: scene.pause
-				 }">
+				 ng-class="{ pause: scene.pause }">
 				<div ng-repeat="sponge in data.sponges"
 					 ng-class="sponge.classes"
 					 class="sponge">
 					<div ng-repeat="face in sponge.faces"
 					     face="face"
 					     ng-class="face.classes"
-					     ng-click="faceClick(face, $event)">
-					    content???
+					     ng-click="faceClick(face, $event)"
+					     ng-style="{ background-image: 'url(\'sponge-images/' + face.img + '\')' }">
 					</div>
 				</div>
+			</div>
+			<div class="selected"
+				 ng-if="selected"
+				 ng-class="{ visible: showSelected }">
+				<h1>{{selected.title}}</h1>
+				<p>{{selected.text}}</p>
 			</div>
 		</div>
 	</body>

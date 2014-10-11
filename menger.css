@@ -54,9 +54,17 @@
 .right {
 	background: red;
 }
-[face].outer:hover {
-	visibility: visible !important;
-	background: yellow !important;
+[face].outer {
+	cursor: pointer;
+}
+[face].outer:hover:after {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	content: ' ';
+	background: rgba(255, 255, 255, .5);
 }
 
 .far-inner {
@@ -67,4 +75,23 @@
 }
 .outer {
 	z-index: 5;
+}
+
+.selected {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.5);
+	transition: opacity .4s;
+	-ms-transition: opacity .4s;
+	-moz-transition: opacity .4s;
+	-webkit-transition: opacity .4s;
+	opacity: 0;
+	color: white;
+	font-family: sans-serif;
+}
+.selected.visible {
+	opacity: 1;
 }
