@@ -2,6 +2,7 @@
 	<head>
 		<script src="angular.min.js"></script>
 		<script src="data.js"></script>
+		<script src="sponges.js"></script>
 		<script src="mega.js"></script>
 		<script src="menger.js"></script>
 		<link rel="stylesheet" type="text/css" href="menger.css">
@@ -27,6 +28,7 @@
 				 ng-class="{ visible: showSelected }">
 				<h1>{{selected.title}}</h1>
 				<div class="content">
+					<img src="sponge-images/{{selected.image}}">
 					<p>{{selected.text}}</p>
 				</div>
 			</article>

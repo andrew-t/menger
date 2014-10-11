@@ -39,20 +39,24 @@ angular.module('menger', [])
 		},
 		controller: 'sceneController',
 		link: function(scope, element, attrs, ctrl) {
+			var resizeTimeout;
 			function resize() {
-				ctrl.size = {
-					width: element.prop('offsetWidth'),
-					height: element.prop('offsetHeight')
-				};
-				var m = Math.max(ctrl.size.width, ctrl.size.height);
-				element.css('font-size', m / scope.scene.fitSize + 'px');
-				ctrl.trigger();
+				if (resizeTimeout) timeout.cancel(resizeTimeout);
+				resizeTimeout = timeout(function(){
+					ctrl.size = {
+						width: element.prop('offsetWidth'),
+						height: element.prop('offsetHeight')
+					};
+					var m = Math.min(ctrl.size.width, ctrl.size.height);
+					element.css('font-size', m / scope.scene.fitSize + 'px');
+					ctrl.trigger();
+				}, 150);
 			};
 			angular.element(window).on('resize', resize);
 			scope.$on('$destroy', function() {
 				angular.element(window).off('resize', resize);
 			});
-			timeout(resize);
+			resize();
 		}
 	};
 }]).directive('face', function() {

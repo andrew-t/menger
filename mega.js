@@ -15,7 +15,7 @@ angular.module('mega', ['menger'])
 					'scale3d(' + scale + ', ' + scale + ', ' + scale + ') ',
 				sensitivity: 5,
 				maxRotation: 45,
-				fitSize: 100
+				fitSize: 80
 			};
 		});
 	scope.data = data;
@@ -59,16 +59,13 @@ angular.module('mega', ['menger'])
 		if (scope.scene.pause)
 			return;
 		if (face.level === scope.zoom) {
-			if (!~face.classes.indexOf('outer'))
+			if (!face.info)
 				return;
 			scope.scene.pause = true;
 			face.classes.push('topmost');
 			face.classes.push('focussed');
 			lastFace = face;
-			scope.selected = {
-				title: 'title',
-				text: 'text'
-			};
+			scope.selected = face.info;
 			scope.showSelected = false;
 			timeout(function() {
 				element.on('click', resume);
