@@ -3,6 +3,8 @@ var data = {
 };
 
 (function(){
+	var phi = (1 + Math.sqrt(5)) / 2,
+		hue = 0;
 	function expandFaces(faceSets, n) {
 		var faces = [];
 		faceSets.forEach(function(faceSet) {
@@ -17,6 +19,7 @@ var data = {
 					face.transform += ' translate3d(' + (x * 18 - 18) + 'em, ' + (y * 18 - 18) + 'em, ' + face.offset + 'em)';
 					delete face.offset;
 					face.level = n;
+					face.colour = 'hsl(' + (hue += phi * 360) + ', 75%, 50%)';
 					faces.push(face);
 				});
 			});

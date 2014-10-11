@@ -18,16 +18,18 @@
 					     face="face"
 					     ng-class="face.classes"
 					     ng-click="faceClick(face, $event)"
-					     ng-style="{ background-image: 'url(\'sponge-images/' + face.img + '\')' }">
+					     ng-style="{ background: face.img ? 'url(\'sponge-images/' + face.img + '\')' : face.colour }">
 					</div>
 				</div>
 			</div>
-			<div class="selected"
+			<article class="selected"
 				 ng-if="selected"
 				 ng-class="{ visible: showSelected }">
 				<h1>{{selected.title}}</h1>
-				<p>{{selected.text}}</p>
-			</div>
+				<div class="content">
+					<p>{{selected.text}}</p>
+				</div>
+			</article>
 		</div>
 	</body>
 </html>
