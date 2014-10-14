@@ -1,8 +1,12 @@
 angular.module('menger', [])
-.controller('sceneController', ['$scope', function(scope) {
+.controller('sceneController', ['$scope', '$timeout', function(scope, timeout) {
 	var faces = [],
 		self = this,
-		lastEvent;
+		lastEvent,
+		timeoutObject,
+		lastUpdate,
+		debounce = 30,
+		lastCoords = {};
 	this.register = function(callback) {
 		faces.push(callback);
 	};
@@ -27,10 +31,27 @@ angular.module('menger', [])
 			face(sceneTransform);
 		});
 	};
+	function mousemove(event) {
+		if (event.pageX == lastCoords.pageX && event.pageY == lastCoords.pageY)
+			return;
+		lastCoords = event;
+		var now = new Date().getTime();
+		if (lastUpdate + debounce > now) {
+			if (!timeoutObject)
+				timeoutObject = timeout(function() {
+					mousemove(event);
+				}, debounce);
+		} else {
+			self.trigger(event);
+			lastUpdate = now;
+			timeout.cancel(timeoutObject);
+			timeoutObject = undefined;
+		}
+	}
 	scope.$watch(self.trigger);
-	angular.element(window).on('mousemove', self.trigger);
+	angular.element(window).on('mousemove', mousemove);
 	scope.$on('$destroy', function() {
-		angular.element(window).off('mousemove', self.trigger);
+		angular.element(window).off('mousemove', mousemove);
 	});
 }]).directive('scene', ['$timeout', function(timeout) {
 	return {
