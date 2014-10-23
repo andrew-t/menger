@@ -103,6 +103,9 @@
 [face].focussed:before {
 	background: transparent;
 }
+[face].focussed span {
+	opacity: 0;
+}
 
 .far-inner {
 	z-index: 3;

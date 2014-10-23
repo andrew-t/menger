@@ -138,5 +138,5 @@ var data = {
 		} while (!front);
 	}
 
-	spongeCascade(3);
+	spongeCascade(2);
 })();

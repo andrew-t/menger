@@ -1,27 +1,3 @@
-var sponges = [
-	{
-		level: 1,
-		title: 'Sponge ',
-		text: 'It was the best of sponges, it was the worst of sponges',
-		image: '1.jpg'
-	}
-];
-
-// and then we'd add the rest of the data but for now...
-(function() {
-	var template = sponges.pop(),
-		spongeNumber = 0;
-	[18, 12, 9, 5].forEach(function(n, level) {
-		for (var i = 0; i < n; ++i)
-			sponges.push({
-				level: level + 1,
-				title: template.title + ++spongeNumber,
-				text: template.text,
-				image: ((sponges.length % 14) + 1) + '.jpg'
-			});
-	});
-})();
-
 // reverse order of levels - high levels first
 sponges.sort(function(a, b) {
 	return b.level - a.level;
@@ -44,21 +20,28 @@ sponges.sort(function(a, b) {
 			d = data.sponges[level].faces[offset + f];
 		d.info = sponge;
 		d.img = sponge.image;
+      d.label = sponge.image ? '' : sponge.title;
 	};
 	var face = 0,
-		lastLevel = 0;
+		lastLevel = Infinity;
 		square = 0,
 		front = false;
 	sponges.forEach(function(sponge, i) {
-		if (sponge.level !== lastLevel) {
+		if (sponge.level < lastLevel) {
 			lastLevel = sponge.level;
 			front = (sponge.level == 1);
 			square = 0;
 			face = 0;
 		}
-		populate(4 - sponge.level, face, square, front, sponge);
+		populate(3 - lastLevel, face, square, front, sponge);
 		face = (face + 1) % 3;
 		if (!face) ++square;
-		if (square > (front ? 7 : 6)) throw 'too many level ' + sponge.level + 's';
+		if (square > (front ? 7 : 6)) {
+         console.log('too many level ' + sponge.level + 's; demoting some');
+         lastLevel--;
+         front = lastLevel == 1;
+         square = 0;
+         face = 0;
+      }
 	});
 })();

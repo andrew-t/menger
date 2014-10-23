@@ -3,6 +3,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<script src="angular.min.js"></script>
 		<script src="data.js"></script>
+		<script src="sponge-data.js"></script>
 		<script src="sponges.js"></script>
 		<script src="mega.js"></script>
 		<script src="menger.js"></script>
@@ -20,7 +21,8 @@
 					     face="face"
 					     ng-class="face.classes"
 					     ng-click="faceClick(face, $event)"
-					     ng-style="{ background: face.img ? 'url(\'sponge-images/' + face.img + '\')' : face.colour }">
+					     ng-style="{ background: face.img ? 'white, url(\'http://megamenger.com/' + face.img + '\')' : face.colour }">
+					     <span ng-if="face.label">{{face.label}}</span>
 					</div>
 				</div>
 			</div>
@@ -30,7 +32,7 @@
 				<h1>{{selected.title}}</h1>
 				<div class="content">
 					<h2>Level {{selected.level}}</h2>
-					<img src="sponge-images/{{selected.image}}">
+					<img src="http://megamenger.comiselected.image}}">
 					<p>{{selected.text}}</p>
 				</div>
 			</article>
