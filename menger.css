@@ -103,6 +103,10 @@
 [face].focussed:before {
 	background: transparent;
 }
+[face] span {
+	color: white;
+	font-family: sans-serif;
+}
 [face].focussed span {
 	opacity: 0;
 }

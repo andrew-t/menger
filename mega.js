@@ -40,7 +40,10 @@ angular.module('mega', ['menger'])
 			}, 400);
 		}
 	}
+	var zooming = false;
 	function zoom(diff, frames, period) {
+		if (zooming) return;
+		zooming = true;
 		var target = scope.zoom + diff,
 			mspf = period / frames;
 		diff /= frames;
@@ -50,7 +53,10 @@ angular.module('mega', ['menger'])
 				scope.zoom += diff;
 				if (diff > 0 ? scope.zoom < target : (scope.zoom > target))
 					timeout(frame, mspf);
-				else scope.zoom = target;
+				else {
+					scope.zoom = target;
+					zooming = false;
+				}
 			});
 		}
 		timeout(frame);
@@ -75,4 +81,16 @@ angular.module('mega', ['menger'])
 			zoom(1, 20, 400);
 		else zoom(-1, 20, 400);;
 	};
-}]);
+}]).directive('html', function(){
+	// Runs during compile
+	return {
+		scope: {
+			html: '='
+		}, 
+		link: function(scope, element) {
+			scope.$watch('html', function(html) {
+				element.html(html);
+			})
+		}
+	};
+});
