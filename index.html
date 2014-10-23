@@ -7,9 +7,20 @@
 		<script src="sponges.js"></script>
 		<script src="mega.js"></script>
 		<script src="menger.js"></script>
+		<link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700' rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" type="text/css" href="menger.css">
 	</head>
 	<body ng-app="mega">
+		<div class="header">
+			<h1><img src="mega-menger-logo.png" alt="Mega Menger"></h1>
+			<div>
+				<img src="supported-by-queen-mary.png" alt="Supported By Queen Mary University of London">
+			</div>
+		</div>
+		<div class="footer">
+			<p>&copy; Copyright Mega Menger 2014</p>
+			<p>Main website by <a href="http://www.alisonhover.com/">Alison Hover</a>; 3D Menger Sponge by <a href="http://www.andrewt.net">Andrew Taylor</a></p>
+		</div>
 		<div ng-controller="mega" id="mega">
 			<div scene="scene"
 				 id="scene"
@@ -21,7 +32,7 @@
 					     face="face"
 					     ng-class="face.classes"
 					     ng-click="faceClick(face, $event)"
-					     ng-style="{ background: face.img ? 'white, url(\'http://megamenger.com/' + face.img + '\')' : face.colour }">
+					     ng-style="{ background: face.img ? 'white url(\'http://megamenger.com/' + face.img + '\')' : face.colour }">
 					     <span ng-if="face.label">{{face.label}}</span>
 					</div>
 				</div>

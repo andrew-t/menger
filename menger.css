@@ -1,3 +1,50 @@
+body {
+	font-family: 'PT Sans', sans-serif;
+	padding: 0;
+	margin: 0;
+	color: white;
+}
+
+.header {
+	background: #861e22;
+	margin: 0;
+	padding: 2em;
+	display: flex;
+	display: -webkit-flex;
+	justify-content: stretch;
+	-webket-justify-content: stretch;
+}
+.header h1 {
+	flex: 1;
+	-webkit-flex: 1;
+}
+.header div {
+	display: flex;
+	display: -webkit-flex;
+	-webkit-align-items: center;
+	align-items: center;
+}
+.footer {
+	background: #861e22;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	padding: 1em 2em;
+	display: flex;
+	display: -webkit-flex;
+	justify-content: stretch;
+	-webket-justify-content: stretch;
+}
+.footer p:first-child {
+	flex: 1;
+	-webkit-flex: 1;
+}
+body:not(.zoomed):not(.focussed) .footer a {
+	position: relative;
+	z-index: 1;
+}
+
 [scene] {
 	position: absolute;
 	top: 0;
@@ -7,7 +54,6 @@
 	overflow: hidden;
     -webkit-perspective: 500em;
     perspective: 500em;
-    background: black;
 }
 
 [face] {
@@ -19,6 +65,10 @@
 	border: 1px solid black;
 	background-size: cover !important;
 	background-position: 50% 50% !important;
+	display: flex;
+	display: -webkit-flex;
+	-webkit-align-items: center;
+	align-items: center;
 }
 
 .pause [face] {
@@ -42,8 +92,9 @@
 	left: 0;
 	width: 100%;
 	height: 100%;
+	z-index: 2;
 }
-[face].topmost {
+[face].topmost, [face].topmost:before [face].topmost:after {
 	z-index: 10;
 }
 
@@ -104,8 +155,13 @@
 	background: transparent;
 }
 [face] span {
-	color: white;
-	font-family: sans-serif;
+	font-size: 2em;
+	width: 100%;
+	padding: 1em;
+	text-align: center;
+	text-shadow: 0 0 2px black;
+	position: relative;
+	z-index: 2;
 }
 [face].focussed span {
 	opacity: 0;
@@ -133,8 +189,6 @@
 	-moz-transition: opacity .4s;
 	-webkit-transition: opacity .4s;
 	opacity: 0;
-	color: white;
-	font-family: sans-serif;
 	overflow: auto;
 }
 .selected.visible {
@@ -159,6 +213,13 @@
 	font-size: 1.5em;
 	text-shadow: 0 .1em .3em black;
 	text-align: justify;
+}
+a {
+	color: white;
+	font-weight: bold;
+}
+a:hover {
+	text-decoration: none;
 }
 .content img {
 	max-width: calc(100% - 2rem);

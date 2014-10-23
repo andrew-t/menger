@@ -31,6 +31,7 @@ angular.module('mega', ['menger'])
 				scope.showSelected = false;
 			});
 			timeout(function() {
+				document.getElementsByTagName('body')[0].classList.remove('focussed');
 				lf.classes.pop();
 				scope.$apply(function() {
 					scope.selected = undefined;
@@ -57,6 +58,10 @@ angular.module('mega', ['menger'])
 					scope.zoom = target;
 					zooming = false;
 				}
+				if (scope.zoom > 0)
+					document.getElementsByTagName('body')[0].classList.add('zoomed');
+				else
+					document.getElementsByTagName('body')[0].classList.remove('zoomed');
 			});
 		}
 		timeout(frame);
@@ -69,6 +74,7 @@ angular.module('mega', ['menger'])
 				return;
 			scope.scene.pause = true;
 			face.classes.push('topmost');
+			document.getElementsByTagName('body')[0].classList.add('focussed');
 			face.classes.push('focussed');
 			lastFace = face;
 			scope.selected = face.info;
@@ -79,7 +85,7 @@ angular.module('mega', ['menger'])
 			});
 		} else if (face.level > scope.zoom)
 			zoom(1, 20, 400);
-		else zoom(-1, 20, 400);;
+		else zoom(-1, 20, 400);
 	};
 }]).directive('html', function(){
 	// Runs during compile

@@ -20,7 +20,7 @@ sponges.sort(function(a, b) {
 			d = data.sponges[level].faces[offset + f];
 		d.info = sponge;
 		d.img = sponge.image;
-      d.label = sponge.image ? '' : sponge.title;
+      d.label = sponge.title;
 	};
 	var face = 0,
 		lastLevel = Infinity;
