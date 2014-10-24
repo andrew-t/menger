@@ -32,7 +32,7 @@
 					     face="face"
 					     ng-class="face.classes"
 					     ng-click="faceClick(face, $event)"
-					     ng-style="{ background: face.img ? 'white url(\'http://megamenger.com/' + face.img + '\')' : face.colour }">
+					     ng-style="{ background: face.img ? 'white url(\'sponge-images/' + face.img + '\')' : face.colour }">
 					     <span ng-if="face.label">{{face.label}}</span>
 					</div>
 				</div>
@@ -43,7 +43,7 @@
 				<h1>{{selected.title}}</h1>
 				<div class="content">
 					<h2>Level {{selected.level}}</h2>
-					<img src="http://megamenger.comiselected.image}}">
+					<img src="sponge-images/{{selected.image}}">
 					<p html="selected.text"></p>
 				</div>
 			</article>
