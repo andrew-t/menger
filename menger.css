@@ -62,7 +62,7 @@ body:not(.zoomed):not(.focussed) .footer a {
 	left: calc(50% - 9em);
 	top: calc(50% - 9em);
 	position: absolute;
-	border: 1px solid black;
+	border: 2px solid black;
 	background-size: cover !important;
 	background-position: 50% 50% !important;
 	display: flex;
