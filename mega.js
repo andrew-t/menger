@@ -23,6 +23,9 @@ angular.module('mega', ['menger'])
 		scene = angular.element(document.getElementById('scene')),
 		lastFace;
 	function resume(event) {
+		for (var target = event.target; target; target = target.parentElement)
+			if (target.tagName == 'A')
+				return;
 		if (lastFace) {
 			var lf = lastFace;
 			lastFace = undefined;
@@ -87,8 +90,7 @@ angular.module('mega', ['menger'])
 			zoom(1, 20, 400);
 		else zoom(-1, 20, 400);
 	};
-}]).directive('html', function(){
-	// Runs during compile
+}]).directive('html', function() {
 	return {
 		scope: {
 			html: '='
