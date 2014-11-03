@@ -78,7 +78,6 @@ body:not(.zoomed):not(.focussed) .footer a {
 	-webkit-transition: all .4s;
 }
 [face].focussed {
-	/* TODO - these scales should ALWAYS cover the screen. */
 	transform: translateZ(50em) !important;
 	-ms-transform: translateZ(50em) !important;
 	-moz-transform: translateZ(50em) !important;
@@ -87,7 +86,8 @@ body:not(.zoomed):not(.focussed) .footer a {
 	left: 0;
 	width: 100%;
 	height: 100%;
-	z-index: 2;
+	z-index: 200;
+	border: none;
 }
 [face].topmost, [face].topmost:before [face].topmost:after {
 	z-index: 10;
@@ -154,7 +154,8 @@ body:not(.zoomed):not(.focussed) .footer a {
 	width: 100%;
 	padding: 1em;
 	text-align: center;
-	text-shadow: 0 0 2px black;
+	text-shadow: 0 0 2px black, 0 0 2px black, 0 0 2px black;
+	font-weight: bold;
 	position: relative;
 	z-index: 2;
 }

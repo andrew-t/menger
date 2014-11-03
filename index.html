@@ -9,6 +9,7 @@
 		<script src="menger.js"></script>
 		<link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700' rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" type="text/css" href="menger.css">
+		<title>MegaMenger | Distributed Fractal Build 2014</title>
 	</head>
 	<body ng-app="mega">
 		<div class="header">
@@ -32,7 +33,11 @@
 					     face="face"
 					     ng-class="face.classes"
 					     ng-click="faceClick(face, $event)"
-					     ng-style="{ background: face.img ? 'white url(\'http://megamenger.com/' + face.img + '\')' : face.colour }">
+					     ng-style="{ background: face.img 
+					     	? face.colour + ' url(\'http://megamenger.com/images/sponges/' + face.img + '\')'
+					     	: (face.label
+					     		? face.colour
+					     		: 'white url(\'http://megamenger.com/images/sponge.png\')') }">
 					     <span ng-if="face.label">{{face.label}}</span>
 					</div>
 				</div>
@@ -43,8 +48,22 @@
 				<h1>{{selected.title}}</h1>
 				<div class="content">
 					<h2>Level {{selected.level}}</h2>
-					<img ng-if="selected.image" src="http://megamenger.com/{{selected.image}}">
-					<p html="selected.text"></p>
+					<p ng-if="selected.venue">
+						<strong>Venue:</strong> 
+						<span html="selected.venue"></span>
+					</p>
+					<p ng-if="selected.date">
+						<strong>Build dates:</strong> {{selected.date}}
+					</p>
+					<p ng-if="selected.person">
+						<strong>Build organiser:</strong>
+						<a href="mailto:{{selected.email}}" ng-if="selected.email">{{selected.person}}</a>
+						<span ng-if="!selected.email">{{selected.person}}</span>
+					</p>
+					<img ng-if="selected.image" src="http://megamenger.com/images/sponges/{{selected.image}}">
+					<p ng-if="selected.info">
+						<span html="selected.info"></span>
+					</p>
 				</div>
 			</article>
 		</div>

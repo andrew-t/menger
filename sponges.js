@@ -1,6 +1,8 @@
 // reverse order of levels - high levels first
 sponges.sort(function(a, b) {
-	return b.level - a.level;
+	if (a.level != b.level)
+		return b.level - a.level;
+	return b.score - a.score;
 });
 
 // now populate the faces with them:
