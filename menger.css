@@ -9,20 +9,15 @@ body {
 	background: #861e22;
 	margin: 0;
 	padding: 2em;
-	display: flex;
-	display: -webkit-flex;
-	justify-content: stretch;
-	-webket-justify-content: stretch;
-}
-.header h1 {
-	flex: 1;
-	-webkit-flex: 1;
 }
 .header div {
 	display: flex;
+	display: -ms-flexbox;
 	display: -webkit-flex;
 	-webkit-align-items: center;
+	-ms-align-items: center;
 	align-items: center;
+	-ms-flex-align: center;
 }
 .footer {
 	background: #861e22;
@@ -31,15 +26,30 @@ body {
 	left: 0;
 	right: 0;
 	padding: 1em 2em;
-	display: flex;
-	display: -webkit-flex;
-	justify-content: stretch;
-	-webket-justify-content: stretch;
 }
+
+.header,
+.footer {
+	display: flex;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: -ms-flex;
+	justify-content: stretch;
+	-webkit-justify-content: stretch;
+	-ms-flex-align: stretch;
+}
+.header > *,
+.footer > * {
+	display: inline-block;
+}
+.header h1,
 .footer p:first-child {
 	flex: 1;
 	-webkit-flex: 1;
+	-ms-flex: 1;
 }
+
+
 body:not(.zoomed):not(.focussed) .footer a {
 	position: relative;
 	z-index: 1;
@@ -66,9 +76,13 @@ body:not(.zoomed):not(.focussed) .footer a {
 	background-size: cover !important;
 	background-position: 50% 50% !important;
 	display: flex;
+	display: -ms-flexbox;
 	display: -webkit-flex;
+	display: -ms-flex;
 	-webkit-align-items: center;
+	-ms-align-items: center;
 	align-items: center;
+	-ms-flex-align: center;
 }
 
 .pause [face] {
@@ -151,13 +165,14 @@ body:not(.zoomed):not(.focussed) .footer a {
 }
 [face] span {
 	font-size: 2em;
-	width: 100%;
 	padding: 1em;
 	text-align: center;
 	text-shadow: 0 0 2px black, 0 0 2px black, 0 0 2px black;
 	font-weight: bold;
 	position: relative;
 	z-index: 2;
+	display: block;
+	width: 7em;
 }
 [face].focussed span {
 	opacity: 0;
@@ -186,6 +201,9 @@ body:not(.zoomed):not(.focussed) .footer a {
 	opacity: 0;
 	overflow: auto;
 	color: #666;
+}
+.selected img {
+	border: .1em solid white;
 }
 .selected.visible {
 	opacity: 1;
