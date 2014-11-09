@@ -13,3 +13,5 @@ This website is the picture gallery for the MegaMenger website: it is itself a M
 ## Still to do
 
 The website is currently waiting on updated information from all the build sites, and thumbnail versions of the images for the faces, as the current version uses the full-size images which load and render more slowly than I would like.
+
+Also when I get a moment I would like to support the History API for navigating between levels and detail views.
