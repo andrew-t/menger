@@ -9,3 +9,7 @@ A few locations around the world have built 1.5m-tall, 90kg level three monsters
 This website is the picture gallery for the MegaMenger website: it is itself a Menger Sponge, with the level three sponges displayed on the large outer faces, the level twos on the smaller divisions of the centre cube, and the level ones another level down again. The whole thing gently rotates and faces can be clicked to show details of a particular build.
 
 [View the gallery](http://github.andrewt.net/menger)
+
+## Still to do
+
+The website is currently waiting on updated information from all the build sites, and thumbnail versions of the images for the faces, as the current version uses the full-size images which load and render more slowly than I would like.
