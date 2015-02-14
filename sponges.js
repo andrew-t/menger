@@ -22,7 +22,7 @@ sponges.sort(function(a, b) {
 			d = data.sponges[level].faces[offset + f];
 		d.info = sponge;
 		d.img = sponge.image;
-      d.label = sponge.title;
+    	d.label = sponge.title;
 	};
 	var face = 0,
 		lastLevel = Infinity;
@@ -39,11 +39,11 @@ sponges.sort(function(a, b) {
 		face = (face + 1) % 3;
 		if (!face) ++square;
 		if (square > (front ? 7 : 6)) {
-         console.log('too many level ' + sponge.level + 's; demoting some');
-         lastLevel--;
-         front = lastLevel == 1;
-         square = 0;
-         face = 0;
+			console.log('too many level ' + sponge.level + 's; demoting some');
+			lastLevel--;
+			front = lastLevel == 1;
+			square = 0;
+			face = 0;
       }
 	});
 })();

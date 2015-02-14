@@ -34,7 +34,7 @@
 					     ng-class="face.classes"
 					     ng-click="faceClick(face, $event)"
 					     ng-style="{ background: face.img 
-					     	? face.colour + ' url(\'http://megamenger.com/images/sponges/' + face.img + '\')'
+					     	? face.colour + ' url(\'img/thumb/' + face.img + '\')'
 					     	: (face.label
 					     		? face.colour
 					     		: 'white url(\'http://megamenger.com/images/sponge.png\')') }">
@@ -61,7 +61,7 @@
 						<a href="mailto:{{selected.email}}" ng-if="selected.email">{{selected.person}}</a>
 						<span ng-if="!selected.email">{{selected.person}}</span>
 					</p>
-					<img ng-if="selected.image" src="http://megamenger.com/images/sponges/{{selected.image}}">
+					<img ng-if="selected.image" src="img/{{selected.image}}">
 					<p ng-if="selected.info">
 						<span html="selected.info"></span>
 					</p>

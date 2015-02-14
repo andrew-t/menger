@@ -30,3 +30,8 @@ fs.writeFileSync(
 		}
 	) + ';',
 	{ encoding: 'utf8' });
+
+fs.writeFileSync(
+	'sponge-data.json',
+	JSON.stringify(tsv),
+	{ encoding: 'utf8' });
