@@ -19,8 +19,13 @@ var tsv = fs.readFileSync('sponges.tsv', 'utf8')
 		info: line[21]
 	};
 }).filter(function(value) {
-	return value.title;
+	return value.score && value.title;
 });
+
+console.log('There are ' + tsv.length + ' sponges.');
+var scores = {};
+tsv.forEach(function(value) { scores[value.score+''] = (scores[value.score+'']+1) || 1; });
+console.dir(scores);
 
 fs.writeFileSync(
 	'sponge-data.js',
